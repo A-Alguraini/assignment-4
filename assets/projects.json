@@ -1,0 +1,37 @@
+{
+  "projects": [
+    {
+      "id": "k-park",
+      "title": "K Park Parking App",
+      "date": "2025-10-10",
+      "summary": "Branding and UI concept for a campus parking app.",
+      "details": "Designed logo and flows for finding parking.",
+      "tags": ["ui","branding","campus"],
+      "difficulty": "intermediate",
+      "image": "assets/images/kpark.jpg",
+      "imageAlt": "K Park app logo"
+    },
+    {
+      "id": "class-vacancy",
+      "title": "Class Vacancy Schedule",
+      "date": "2025-10-12",
+      "summary": "Editable weekly schedule for open class slots.",
+      "details": "Printable table and HTML/CSS version.",
+      "tags": ["planning","html","table"],
+      "difficulty": "beginner",
+      "image": "assets/images/classVacancySchedule.png",
+      "imageAlt": "Class vacancy schedule table"
+    },
+    {
+      "id": "personal-portfolio",
+      "title": "Personal Portfolio",
+      "date": "2025-10-15",
+      "summary": "Single-page portfolio with greeting and form.",
+      "details": "Theme toggle + validation.",
+      "tags": ["web","portfolio","javascript"],
+      "difficulty": "advanced",
+      "image": "assets/images/gradpic2022.jpg",
+      "imageAlt": "My portrait used in the portfolio"
+    }
+  ]
+}

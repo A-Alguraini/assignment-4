@@ -1,0 +1,14 @@
+﻿# Ignore system and editor files
+.DS_Store
+Thumbs.db
+*.log
+node_modules/
+
+# Ignore local environment
+.env
+.env.local
+
+# Ignore IDE folders
+.idea/
+.vscode/
+*.swp

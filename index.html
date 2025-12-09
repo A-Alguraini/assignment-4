@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>My Interactive Portfolio</title>
+  <link rel="preload" href="css/styles.css" as="style">
+  <link rel="stylesheet" href="css/styles.css"/>
+</head>
+<body class="light">
+  <header class="container">
+    <div class="brand">My Portfolio</div>
+    <nav class="tabs" role="tablist" aria-label="Sections">
+      <button class="tab active" data-tab="about" role="tab" aria-selected="true">About</button>
+      <button class="tab" data-tab="projects" role="tab" aria-selected="false">Projects</button>
+      <button class="tab" data-tab="contact" role="tab" aria-selected="false">Contact</button>
+    </nav>
+    <div class="actions">
+      <div class="timer" aria-live="polite" aria-label="Time on page">
+        <span>Time here:</span>
+        <strong id="sessionTimer">00:00</strong>
+      </div>
+      <button id="themeToggle" class="btn" aria-label="Toggle theme">🌓</button>
+    </div>
+  </header>
+
+  <main class="container">
+    <section id="about" class="panel active" role="tabpanel">
+      <h1 id="greeting" class="reveal"></h1>
+      <p class="muted reveal">Welcome to my portfolio. Explore my work, filter projects by tags, and get in touch.</p>
+        <figure class="card reveal" style="max-width: 340px">
+          <img
+            src="assets/images/gradpic2022.jpg"
+            alt="My profile portrait"
+            width="680" height="680"
+            loading="lazy"
+            style="border-radius:12px; display:block; width:100%; height:auto;"
+          />
+          <figcaption class="muted" style="margin-top:6px">Hello! This is me.</figcaption>
+        </figure>
+      <details class="reveal">
+        <summary>What’s new in this version?</summary>
+        <ul>
+          <li>Pinned project workflow with difficulty, tag, and search filters</li>
+          <li>Live GitHub feed with lazy loading and manual refresh</li>
+          <li>Personalized greeting, timer, and improved performance defaults</li>
+        </ul>
+      </details>
+      <div class="card reveal identity-card">
+        <form id="nameForm">
+          <label for="displayName">Tell me how to greet you</label>
+          <div class="name-row">
+            <input id="displayName" name="displayName" placeholder="Enter a nickname" minlength="2" required />
+            <button class="btn" type="submit">Save</button>
+            <button class="btn-outline" type="button" id="clearName">Clear</button>
+          </div>
+          <small id="nameStatus" class="muted" aria-live="polite"></small>
+        </form>
+      </div>
+    </section>
+
+    <section id="projects" class="panel" role="tabpanel" aria-hidden="true">
+      <div class="controls reveal">
+        <input id="searchInput" type="search" placeholder="Search projects..." aria-label="Search projects"/>
+        <select id="sortSelect" aria-label="Sort projects">
+          <option value="title">Sort by Title (A–Z)</option>
+          <option value="date">Sort by Date (Newest)</option>
+        </select>
+        <select id="difficultySelect" aria-label="Filter by difficulty">
+          <option value="any">All difficulty levels</option>
+          <option value="beginner">Beginner friendly</option>
+          <option value="intermediate">Intermediate</option>
+          <option value="advanced">Advanced</option>
+        </select>
+        <div id="tagFilters" class="chips" aria-label="Filter by tag"></div>
+        <div class="control-pair">
+          <button id="reloadBtn" class="btn-outline" type="button">Reload Data</button>
+          <button id="pinnedToggle" class="btn-outline" type="button" aria-pressed="false">Show pinned only</button>
+        </div>
+      </div>
+
+      <div id="status" class="status" role="status" aria-live="polite"></div>
+      <div id="projectStats" class="stats" aria-live="polite"></div>
+      <ul id="projectList" class="grid"></ul>
+      <template id="projectItemTemplate">
+        <li class="card reveal">
+          <button class="pin" type="button" aria-pressed="false" title="Pin project">☆</button>
+          <img class="thumb" alt="" loading="lazy" width="800" height="450" style="display:none; width:100%; height:auto; border-radius:10px; margin-bottom:8px;" />
+          <div class="card-head">
+            <h3 class="title"></h3>
+            <span class="date"></span>
+          </div>
+          <div class="meta">
+            <span class="difficulty"></span>
+          </div>
+          <p class="summary"></p>
+          <div class="tags"></div>
+          <button class="accordion">Details</button>
+          <div class="panel-acc">
+            <p class="details"></p>
+          </div>
+        </li>
+      </template>
+
+      <section id="githubFeed" class="feed reveal" aria-labelledby="githubHeading">
+        <header class="feed-head">
+          <div>
+            <h2 id="githubHeading">Live GitHub Feed</h2>
+            <p class="muted">Latest public repositories from GitHub</p>
+          </div>
+          <button id="githubRefresh" class="btn-outline" type="button">Refresh</button>
+        </header>
+        <div id="githubStatus" class="status" role="status" aria-live="polite"></div>
+        <ul id="githubList" class="feed-list"></ul>
+        <template id="repoTemplate">
+          <li class="feed-card">
+            <div class="feed-row">
+              <strong class="repo-name"></strong>
+              <span class="repo-stars"></span>
+            </div>
+            <p class="repo-desc"></p>
+            <div class="feed-row">
+              <span class="repo-lang"></span>
+              <span class="repo-updated"></span>
+            </div>
+            <a class="repo-link" target="_blank" rel="noopener">View on GitHub</a>
+          </li>
+        </template>
+      </section>
+    </section>
+
+    <section id="contact" class="panel" role="tabpanel" aria-hidden="true">
+      <form id="contactForm" novalidate class="reveal">
+        <h2>Contact Me</h2>
+        <div class="field">
+          <label for="name">Name</label>
+          <input id="name" name="name" required minlength="2" placeholder="Your name"/>
+          <small class="error"></small>
+        </div>
+        <div class="field">
+          <label for="email">Email</label>
+          <input id="email" name="email" type="email" required placeholder="you@example.com"/>
+          <small class="error"></small>
+        </div>
+        <div class="field">
+          <label for="message">Message</label>
+          <textarea id="message" name="message" required minlength="10" placeholder="How can I help?"></textarea>
+          <small class="error"></small>
+        </div>
+        <button class="btn" id="sendBtn" type="submit">Send</button>
+        <div id="formStatus" role="status" class="status"></div>
+      </form>
+    </section>
+  </main>
+
+  <footer class="container muted">
+    <p>© <span id="year"></span> My Portfolio</p>
+  </footer>
+
+  <div id="toast" role="status" aria-live="assertive"></div>
+
+  <script src="js/script.js"></script>
+</body>
+</html>
