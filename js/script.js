@@ -258,7 +258,12 @@ function initForm(){
     $('#sendBtn').disabled = true;
     $('#sendBtn').textContent = 'Sending…';
     try{
-      await new Promise(res=>setTimeout(res, 1200));
+      const res = await fetch('https://formspree.io/f/meoyrvyv', {
+        method: 'POST',
+        body: JSON.stringify({ name, email, message }),
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' }
+      });
+      if(!res.ok) throw new Error('Network error');
       toast('Message sent!');
       status.textContent = 'Thanks! I will get back to you soon.';
       form.reset();
